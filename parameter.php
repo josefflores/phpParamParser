@@ -21,7 +21,9 @@
 		private $parameters = array() ;		// The parameters allowed array
 		private $errors 	= array() ;		// The generated errors
 		private $out 		= array() ;		// The output values
-				
+	
+		private $successFlag = false ;		// If arguments should be returned
+		
 		private $argc ;						// The argument count
 		private $argv ;						// The argument array
 		private $desc ;						// The project description
@@ -232,10 +234,12 @@
 			
 			// Return Failure
 			if( count( $this->errors ) > 0 ) {
+				$this->successFlag = false ;
 				return 1 ;
 			}
 			
 			// Return Success
+			$this->successFlag = true ;
 			return 0 ;
 				
 		}
@@ -320,7 +324,22 @@
 			
 		}
 
+		/**
+		 * 	@name 	getArgs
+		 * 
+		 * 	This function returns the arguments array if possible
+		 * 
+		 * 	@return null	Arguments could not be retrieved
+		 * 	@return array	Derived arguments
+		 */ 	
+		public function getArgs() {
+			if( $this->successFlag )
+				return $out ;	
+			else return null ;
+		}
 	}
+	
+	// php parameter.php -v -h
 	
 	//	Example Starts here 
 	$desc = "This is an argument parser, A project description goes here." ;
@@ -349,5 +368,8 @@
 
 	$P->validate() ;
 	
-		
+	var_dump( $P->getArgs() ) ;
+	
+
+	
 ?>
