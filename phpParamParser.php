@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * 	@name 	parameters
+	 * 	@name 	phpParamParser
 	 * 
 	 * 	This class parses command line arguments, generates a manual and 
 	 * 	validates the arguments.
@@ -13,7 +13,7 @@
 	 * 				only one on. Or if the default value is true then the
 	 * 				enum will chose all or one option.
 	 */
-	class parameters {
+	class phpParamParser {
 	 
 	//	VARIABLES
 	
@@ -216,12 +216,13 @@
 			// Display Errors
 			if( count( $this->errors ) > 0  && 
 				$this->out[ 'v' ] ) {
-					$this->printErrors() ;	
-					$this->manual() ;
+					$this->printErrors() ;
 			}
 			
 			// Show manual
-			if ( $this->out[ 'h' ] ) {
+			if ( $this->out[ 'h' ] ||
+				 ( count( $this->errors ) > 0  && 
+				   $this->out[ 'v' ] ) )  {
 				$this->manual() ;
 			} 
 			
@@ -338,38 +339,5 @@
 			else return null ;
 		}
 	}
-	
-	// php parameter.php -v -h
-	
-	//	Example Starts here 
-	$desc = "This is an argument parser, A project description goes here." ;
-	
-	// Creating instance of class
-	$P = new parameters( $argc , $argv , $desc ) ;
-	
-	// Adding Parameters
-	$P->addParam( array( 'mandatory' => true , 
-					 'type' => 'string' , 
-					 'description' => "The Jenkin's Project Name" ,
-				     'value' => "" ,
- 				     'key' => array( 'p' , 'project' ) ) ) ;
- 			     			     
-	$P->addParam( array( 'mandatory' => true , 
-				     'type' => 'string' , 
-				     'description' => "The git sparse checkout path" ,
-				     'value' => "" ,
-				     'key' => array( 'c' , 'checkout-path' ) ) ) ;
-	
-	$P->addParam( array( 'mandatory' => true , 
-				     'type' => 'enum' , 
-				     'description' => "The action to be carried out by the citool" ,
-				     'value' => false ,
-				     'key' => array( 'build' , 'deploy' , 'test' ) ) ) ; 
-
-	$P->validate() ;
-	
-	var_dump( $P->getArgs() ) ;
-	
-
 	
 ?>
