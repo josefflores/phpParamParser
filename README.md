@@ -1,6 +1,6 @@
 # phpParamParser
-==============
-_This Prjoect is a php parameter parser that I wrote to help develope php command line applications. It currently handles strings, booleans, enumerated types, and numbers._
+
+_This Project is a PHP parameter parser that I wrote to help develop PHP command line applications. It currently handles strings, booleans, enumerated types, and numbers._
 
 ## Requirements
 ### Environment
