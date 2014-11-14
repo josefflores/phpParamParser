@@ -1,9 +1,9 @@
 <?php
     /**
-     * @file driver.php
-     * @author  Jose Flores
+     *  @file driver.php
+     *  @author  Jose Flores
      *
-     * This file is an example usage of the phpParmParser
+     *  This file is an example usage of the phpParmParser
      *
      *  Copyright (C) 2014 Jose F Flores
      *
